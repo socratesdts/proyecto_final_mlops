@@ -34,14 +34,15 @@ jobs:
         run: docker push asdelgado506/bit_project:v1
 
       - name: Deploy to EC2
-          uses: appleboy/ssh-action@master
-          with:
-            host: ${{ secrets.EC2_HOST }}
-            username: ${{ secrets.EC2_USERNAME }}
-            key: ${{ secrets.SSH_PRIVATE_KEY }}
-            script: |
-              docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-              docker stop bit_project || true
-              docker rm -f bit_project || true
-              docker pull asdelgado506/bit_project:v1
-              docker run -d --name bit_project -p 8000:8000 asdelgado506/bit_project:v1
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+            docker stop bit_project || true
+            docker rm -f bit_project || true
+            docker pull asdelgado506/bit_project:v1
+            docker run -d --name project_bitcoin_predictor -p 8000:8000 asdelgado506/bit_project:v1
+
