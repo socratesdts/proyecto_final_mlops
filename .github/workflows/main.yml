@@ -22,7 +22,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build docker image with v1 tag
-        run: docker build -t asdelgado506/bitcoin_project:v1
+        run: docker build -t asdelgado506/bitcoin_project:v1 .
 
       - name: Docker push to Dockerhub with v1 tag
         run: docker push asdelgado506/bitcoin_project:v1
