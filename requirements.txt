@@ -1,6 +1,0 @@
-fastapi
-datetime
-pandas
-uvicorn
-joblib
-scikit-learn
