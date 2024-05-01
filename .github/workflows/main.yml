@@ -21,10 +21,10 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build docker image with v1 tag
-      run: docker build -t asdelgado506/bitcoin_project:v1 .
+      run: docker build -t asdelgado506/bit_project:v1 .
 
     - name: Push Docker image to DockerHub with v1 tag
-      run: docker push asdelgado506/bitcoin_project:v1
+      run: docker push asdelgado506/bit_project:v1
 
     - name: Deploy to EC2
       uses: appleboy/ssh-action@master
@@ -34,8 +34,8 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker stop bitcoin_project || true
-          docker rm -f bitcoin_project || true
-          docker pull asdelgado506/bitcoin_project:v1
-          docker run -d --name bitcoin_project -p 8000:8000 asdelgado506/bitcoin_project:v1
+          docker stop bit_project || true
+          docker rm -f bit_project || true
+          docker pull asdelgado506/bit_project:v1
+          docker run -d --name bit_project -p 8000:8000 asdelgado506/bit_project:v1
 
