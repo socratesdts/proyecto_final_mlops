@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d034703-387a-4938-b18d-ff603eac4dfc" name="Changes" comment="3 commit" />
+    <list default="true" id="5d034703-387a-4938-b18d-ff603eac4dfc" name="Changes" comment="3 commit">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -80,6 +82,7 @@
     "Docker.Dockerfile.executor": "Run",
     "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/asdel/OneDrive/Documentos/Área/Ulead/Gestión_de_la_tecnología_digital/proyecto_final_mlops",
     "node.js.detected.package.eslint": "true",
