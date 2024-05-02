@@ -8,42 +8,34 @@ on:
 
 # Acciones
 jobs:
-  build_docker_image:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check the repo
-        uses: actions/checkout@v2
+    - uses: actions/checkout@v2
+      name: Checkout code
 
-      - name: Login to dockerhub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Login to DockerHub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build docker image with dev tag
-        run: docker build -t asdelgado506/bit_project:v1 .
+    - name: Build docker image with v1 tag
+      run: docker build -t asdelgado506/bitcoin_project:v1 .
 
-      - name: Docker push to Dockerhub with dev tag
-        run: docker push asdelgado506/bit_project:v1
+    - name: Push Docker image to DockerHub with v1 tag
+      run: docker push asdelgado506/bitcoin_project:v1
 
-      - name: Build docker image with v1 tag
-        run: docker build -t asdelgado506/bit_project:v1 .
-
-      - name: Docker push to Dockerhub with v1 tag
-        run: docker push asdelgado506/bit_project:v1
-
-      - name: Deploy to EC2
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-            docker stop bit_project || true
-            docker rm -f bit_project || true
-            docker pull asdelgado506/bit_project:v1
-            docker run -d --name project_bitcoin_predictor -p 8000:8000 asdelgado506/bit_project:v1
-
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker stop bitcoin_project || true
+          docker rm -f bitcoin_project || true
+          docker pull asdelgado506/bitcoin_project:v1
+          docker run -d --name bitcoin_project -p 8000:8000 asdelgado506/bitcoin_project:v1
 
