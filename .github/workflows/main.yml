@@ -44,6 +44,6 @@ jobs:
             docker stop bit_project || true
             docker rm -f bit_project || true
             docker pull asdelgado506/bit_project:v1
-            docker run -d --name project_bitcoin_predictor -p 8000:8000 asdelgado506/bit_project:v1
+            docker run -d --name bit_project -p 8000:8000 asdelgado506/bit_project:v1
 
 
